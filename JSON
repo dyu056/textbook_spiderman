@@ -1,0 +1,82 @@
+{
+  "questionsAndSolutions": [
+    {
+      "questionId": 2585,
+      "solution": {
+        "solutionId": 7500,
+        "sourceType": "tbq",
+        "sourceId": "00100B",
+        "userId": "100000786194527",
+        "solutionContent": {
+          "type": "calc",
+          "hints": [],
+          "hasSameExplanationForAllAnswers": false,
+          "answers": [
+            {
+              "type": "calc",
+              "widgets": [
+                {
+                  "type": "text",
+                  "text": "\u003Cp\u003E\u003Cformula data-display=\"inline\"\u003EA \\cup B = \\{1,2,3,4,5,6,7,8,9\\}\u003C/formula\u003E\u003C/p\u003E"
+                }
+              ],
+              "explanations": [
+                {
+                  "type": "step_by_step",
+                  "explanations": [
+                    {
+                      "type": "text",
+                      "widgets": [
+                        {
+                          "type": "text",
+                          "text": "\u003Cp\u003ETake all elements from set \u003Cformula data-display=\"inline\"\u003EA\u003C/formula\u003E and set \u003Cformula data-display=\"inline\"\u003EB\u003C/formula\u003E.\u003C/p\u003E"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "widgets": [
+                        {
+                          "type": "text",
+                          "text": "\u003Cp\u003E\u003Cformula data-display=\"inline\"\u003EA + B = \\{1,3,4,5,9\\} + \\{2,4,6,7,8\\} \\\\ \\{1,2,3,4,4,5,6,7,8,9\\}\u003C/formula\u003E\u003C/p\u003E"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "step_by_step",
+                  "explanations": [
+                    {
+                      "type": "text",
+                      "widgets": [
+                        {
+                          "type": "text",
+                          "text": "\u003Cp\u003E\u003Cformula data-display=\"inline\"\u003EA \\cup B\u003C/formula\u003E is defined as \u003Cformula data-display=\"inline\"\u003EA\u003C/formula\u003E + \u003Cformula data-display=\"inline\"\u003EB - \\lparen A \\cap B\\rparen\u003C/formula\u003E. We need to make sure to eliminate the duplicate elements defined in the intersection \u003Cformula data-display=\"inline\"\u003EA \\cap B\u003C/formula\u003E.\u003C/p\u003E"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "widgets": [
+                        {
+                          "type": "text",
+                          "text": "\u003Cp\u003E\u003Cformula data-display=\"inline\"\u003E\\{1,2,3,4,4,5,6,7,8,9\\} - \\{4\\} \\\\ \\{1,2,3,4,5,6,7,8,9\\}\u003C/formula\u003E\u003C/p\u003E"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "version": 1,
+        "authoredDate": "2019-08-28 16:08:29 -0500 CDT"
+      }
+    }
+  ],
+  "canonicalUrl": "https://www.coursehero.com/textbook-solutions/College-Algebra-10th-Edition-9780321999412-6/Chapter-R-Problem-11-7703/",
+  "isThinContent": true,
+  "noindex": false
+}
