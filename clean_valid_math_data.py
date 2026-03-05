@@ -4,8 +4,10 @@ import re
 from pathlib import Path
 from collections import defaultdict, OrderedDict
 
-SOURCE_DIR = Path('spider_data/Math')
-OUT_DIR = Path('clean_output_1')
+SOURCE_DIR = Path('math_spider/0205_data/valid_data')
+OUT_DIR = Path('clean_output_1/result_0205')
+# Only process this specific file
+TARGET_FILE = None  # Process all .har files in the directory
 
 CANON_RE = re.compile(
     r'/textbook-solutions/(?P<book>[^/]+)/Chapter-(?P<chapter>[^/]+)-Problem-(?P<problem>[^/]+)-(?P<origid>\d+)/?$',
@@ -16,12 +18,11 @@ EDITION_RE = re.compile(r'(\d+(?:st|nd|rd|th)-Edition)', re.IGNORECASE)
 
 YOUTUBE_HOSTS = {'www.youtube.com', 'youtu.be'}
 
-# Only process these 3 valid books (no placeholder data)
-VALID_BOOKS = {
-    'College-Algebra-10th-Edition-9780321999412-6',
-    'Prealgebra-2nd-Edition-9780073384474-9',
-    'Prealgebra-Introductory-Algebra-1st-Edition-9780073512952-10',
-}
+# Process all books (no filter)
+VALID_BOOKS = None
+
+# Starting global problem ID (set to continue from previous batch)
+START_PROBLEM_ID = 35629
 
 
 def parse_canonical(url: str):
@@ -145,8 +146,15 @@ def main():
     # This prevents data from being overwritten when the same book appears in multiple HAR files
     canonical_data = {}  # canon -> (parsed, obj, qas)
 
-    print("Step 1: Collecting data from all HAR files...")
-    for p in SOURCE_DIR.glob('*.har'):
+    print("Step 1: Collecting data from HAR files...")
+    # Only process TARGET_FILE if specified, otherwise all .har files
+    if TARGET_FILE:
+        har_files = [SOURCE_DIR / TARGET_FILE]
+    else:
+        # Recursively find all .har files in subdirectories
+        har_files = list(SOURCE_DIR.rglob('*.har'))
+
+    for p in har_files:
         print(f"  Processing {p.name}...")
         with p.open('r', encoding='utf-8') as f:
             try:
@@ -172,10 +180,8 @@ def main():
             if not parsed:
                 continue
 
-            # Only process valid books (no placeholder data)
+            # Process all books
             book_slug = parsed['book']
-            if book_slug not in VALID_BOOKS:
-                continue
 
             qas = obj.get('questionsAndSolutions') or []
             if not qas:
@@ -201,8 +207,8 @@ def main():
     # Sort books by slug for consistent processing order
     sorted_books = sorted(by_book.items())
 
-    # Global problem ID counter
-    global_problem_id = 1
+    # Global problem ID counter (start from configured value)
+    global_problem_id = START_PROBLEM_ID
 
     print("Step 2: Processing valid books...")
     for book_slug, items in sorted_books:

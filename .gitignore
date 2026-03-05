@@ -2,6 +2,7 @@
 spider_data/
 clean_output/
 clean_output_1/
+math_spider/
 
 # Python
 __pycache__/
